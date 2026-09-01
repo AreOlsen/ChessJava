@@ -39,9 +39,9 @@ public class PawnPiece extends ChessPiece {
 <span class="fc bfc" id="L39" title="All 2 branches covered.">    boolean sameColumn = end.x() == getPosition().x();</span>
 <span class="fc bfc" id="L40" title="All 2 branches covered.">    boolean inFrontRow = end.y() == (getPosition().y() + direction);</span>
 <span class="fc bfc" id="L41" title="All 2 branches covered.">    boolean inDoubleFrontRow = end.y() == (getPosition().y() + direction * 2);</span>
-<span class="fc bfc" id="L42" title="All 2 branches covered.">    boolean inAnglePosition =</span>
-<span class="fc bfc" id="L43" title="All 4 branches covered.">        inFrontRow &amp;&amp; (end.x() == getPosition().x() - 1 || end.x() == getPosition().x() + 1);</span>
-    boolean onStartRow =
+<span class="fc" id="L42">    boolean inAnglePosition =</span>
+<span class="fc bfc" id="L43" title="All 6 branches covered.">        inFrontRow &amp;&amp; (end.x() == getPosition().x() - 1 || end.x() == getPosition().x() + 1);</span>
+<span class="fc" id="L44">    boolean onStartRow =</span>
 <span class="fc bfc" id="L45" title="All 2 branches covered.">        getSide() == ChessSide.WHITE</span>
 <span class="fc bfc" id="L46" title="All 2 branches covered.">            ? getPosition().y() == 1</span>
 <span class="fc bfc" id="L47" title="All 2 branches covered.">            : getPosition().y() == board.getHeight() - 2;</span>

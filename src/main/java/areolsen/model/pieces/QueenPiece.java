@@ -46,7 +46,7 @@ public class QueenPiece extends ChessPiece {
     }
 
     // Lines attack check:
-    if (!position.onSameLine(end) || position.onDiagonal(end)) {
+    if (!(position.onSameLine(end) || position.onDiagonal(end))) {
       return false;
     }
 

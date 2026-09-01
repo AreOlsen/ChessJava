@@ -67,7 +67,7 @@ public class QueenPieceTest {
     QueenPiece queen = new QueenPiece(emptyBoard, new Position(3, 3), ChessSide.WHITE);
     List<Position> moves = emptyBoard.getLegalMoves(new Position(3, 3));
     // Queen can move diagonally in all four directions when board is clear
-    assertTrue(moves.contains(new Position(4, 4))); // Down-right diagonal
+    assertTrue(moves.contains(new Position(5, 5))); // Down-right diagonal
     assertTrue(moves.contains(new Position(2, 2))); // Up-left diagonal
     assertTrue(moves.contains(new Position(3, 4))); // Vertical up
     assertTrue(moves.contains(new Position(4, 3))); // Horizontal right
