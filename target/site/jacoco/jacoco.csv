@@ -7,7 +7,7 @@ chess,areolsen,App,53,0,0,0,9,0,2,0,2,0
 chess,areolsen.model.pieces,KnightPiece,0,50,0,10,0,7,0,9,0,4
 chess,areolsen.model.pieces,RookPiece,0,76,1,7,0,19,1,7,0,4
 chess,areolsen.model.pieces,KingPiece,0,36,0,4,0,7,0,6,0,4
-chess,areolsen.model.pieces,QueenPiece,0,94,2,16,0,21,2,11,0,4
+chess,areolsen.model.pieces,QueenPiece,0,94,1,17,0,21,1,12,0,4
 chess,areolsen.model.pieces,PawnPiece,0,152,2,38,0,25,2,22,0,4
 chess,areolsen.model.pieces,BishopPiece,0,92,1,9,0,18,1,8,0,4
 chess,areolsen.model.grid,Position,2,97,2,14,1,11,2,13,0,7

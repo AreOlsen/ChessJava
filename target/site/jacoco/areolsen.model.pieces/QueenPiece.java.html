@@ -46,7 +46,7 @@ public class QueenPiece extends ChessPiece {
     }
 
     // Lines attack check:
-<span class="pc bpc" id="L49" title="1 of 4 branches missed.">    if (!position.onSameLine(end) || position.onDiagonal(end)) {</span>
+<span class="fc bfc" id="L49" title="All 4 branches covered.">    if (!(position.onSameLine(end) || position.onDiagonal(end))) {</span>
 <span class="fc" id="L50">      return false;</span>
     }
 
