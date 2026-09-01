@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Controller.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.controller</a> &gt; <span class="el_source">Controller.java</span></div><h1>Controller.java</h1><pre class="source lang-java linenums">package areolsen.controller;
+
+import areolsen.model.ChessBoard;
+import areolsen.model.grid.Position;
+import areolsen.view.ViewHandler;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Optional;
+
+/** Abstract chessboard controller class that implements KeyListener &amp; MouseListener. */
+public abstract class Controller implements KeyListener, MouseListener {
+<span class="nc" id="L15">  protected Optional&lt;Position&gt; activeChosenPosition = Optional.empty();</span>
+  private ViewHandler handler;
+  protected ChessBoard board;
+
+  /**
+   * Construct new controller.
+   *
+   * @param handler viewhandler reference.
+   * @param board chessboard reference.
+   */
+<span class="nc" id="L25">  public Controller(ViewHandler handler, ChessBoard board) {</span>
+<span class="nc" id="L26">    this.handler = handler;</span>
+<span class="nc" id="L27">    this.board = board;</span>
+<span class="nc" id="L28">  }</span>
+
+  /**
+   * Get actively chosen position on board.
+   *
+   * @return Actively chosen position on board.
+   */
+  public Optional&lt;Position&gt; getActivePosition() {
+<span class="nc" id="L36">    return activeChosenPosition;</span>
+  }
+
+  /**
+   * Mouse click handler. Calculates grid positioning of click on board and passes to clickHook.
+   *
+   * @param event mouse event processed
+   */
+  @Override
+  public void mouseClicked(MouseEvent event) {
+<span class="nc" id="L46">    Dimension screen = handler.getWindowDimension();</span>
+<span class="nc" id="L47">    int gridX = (int) ((event.getX() / screen.getWidth()) * board.getWidth());</span>
+<span class="nc" id="L48">    int gridY = (int) (board.getHeight() - (event.getY() / screen.getHeight()) * board.getHeight());</span>
+
+<span class="nc" id="L50">    Position clickedPosition = new Position(gridX, gridY);</span>
+
+<span class="nc" id="L52">    clickHook(activeChosenPosition, clickedPosition);</span>
+<span class="nc" id="L53">    handler.getActiveView().repaint();</span>
+<span class="nc" id="L54">  }</span>
+
+  /**
+   * Click hook for mouseClicked function. Overridable for specific controller implementations.
+   *
+   * @param originalPosition Optional of original grid position selected (empty if no position
+   *     selected yet)
+   * @param newPosition new grid position selected by click
+   */
+  protected void clickHook(Optional&lt;Position&gt; originalPosition, Position newPosition) {
+<span class="nc" id="L64">    activeChosenPosition = Optional.of(newPosition);</span>
+<span class="nc" id="L65">  }</span>
+
+  @Override
+<span class="nc" id="L68">  public void mouseEntered(MouseEvent e) {}</span>
+
+  @Override
+<span class="nc" id="L71">  public void mouseExited(MouseEvent e) {}</span>
+
+  @Override
+<span class="nc" id="L74">  public void mousePressed(MouseEvent e) {}</span>
+
+  @Override
+<span class="nc" id="L77">  public void mouseReleased(MouseEvent e) {}</span>
+
+  /**
+   * Key press handler. Simple default that makes R reset the chess game, Escape returns to main
+   * menu.
+   *
+   * @param event Key event handled.
+   */
+  @Override
+  public void keyPressed(KeyEvent event) {
+<span class="nc" id="L87">    final int rKeyCode = 82;</span>
+<span class="nc" id="L88">    final int escKeyCode = 27;</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">    if (event.getKeyCode() == escKeyCode) {</span>
+<span class="nc" id="L90">      handler.changeActiveView(&quot;menu&quot;);</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">    } else if (event.getKeyCode() == rKeyCode) {</span>
+<span class="nc" id="L92">      board.reset();</span>
+<span class="nc" id="L93">      handler.getActiveView().repaint();</span>
+    }
+<span class="nc" id="L95">  }</span>
+
+  @Override
+<span class="nc" id="L98">  public void keyReleased(KeyEvent e) {}</span>
+
+  @Override
+<span class="nc" id="L101">  public void keyTyped(KeyEvent e) {}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

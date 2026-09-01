@@ -1,0 +1,11 @@
+areolsen/model/pieces/KingPieceTest.class
+areolsen/controller/PvPControllerTest.class
+areolsen/model/pieces/RookPieceTest.class
+areolsen/model/grid/PositionTest.class
+areolsen/model/pieces/QueenPieceTest.class
+areolsen/model/ChessBoardTest.class
+areolsen/model/pieces/BishopPieceTest.class
+areolsen/model/pieces/KnightPieceTest.class
+areolsen/model/grid/HashGridTest.class
+areolsen/model/ChessPieceTest.class
+areolsen/model/pieces/PawnPieceTest.class

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PawnPiece.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.model.pieces</a> &gt; <span class="el_source">PawnPiece.java</span></div><h1>PawnPiece.java</h1><pre class="source lang-java linenums">package areolsen.model.pieces;
+
+import areolsen.model.ChessBoard;
+import areolsen.model.ChessPiece;
+import areolsen.model.ChessSide;
+import areolsen.model.grid.Position;
+
+/**
+ * PawnPiece. The pawn piece typically can move 1 step forward. Attack diagonally forward. On first
+ * step it can move 2 cells forward.
+ */
+public class PawnPiece extends ChessPiece {
+
+  /**
+   * Instantiate pawn piece by calling chesspiece constructor.
+   *
+   * @param board ChessBoard the pawn piece belongs to.
+   * @param side ChessSide the pawn piece belongs to.
+   */
+  public PawnPiece(ChessBoard board, Position position, ChessSide side) {
+<span class="fc" id="L21">    super(board, position, side);</span>
+<span class="fc" id="L22">  }</span>
+
+  @Override
+  public double getValue() {
+<span class="fc" id="L26">    return 1d;</span>
+  }
+
+  @Override
+  public String getType() {
+<span class="fc" id="L31">    return &quot;P&quot;;</span>
+  }
+
+  @Override
+  protected boolean movementPattern(Position end) {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">    int direction = getSide() == ChessSide.WHITE ? 1 : -1;</span>
+
+<span class="fc" id="L38">    boolean emptyEnd = board.getPiece(end).isEmpty();</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">    boolean sameColumn = end.x() == getPosition().x();</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">    boolean inFrontRow = end.y() == (getPosition().y() + direction);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">    boolean inDoubleFrontRow = end.y() == (getPosition().y() + direction * 2);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">    boolean inAnglePosition =</span>
+<span class="fc bfc" id="L43" title="All 4 branches covered.">        inFrontRow &amp;&amp; (end.x() == getPosition().x() - 1 || end.x() == getPosition().x() + 1);</span>
+    boolean onStartRow =
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        getSide() == ChessSide.WHITE</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            ? getPosition().y() == 1</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            : getPosition().y() == board.getHeight() - 2;</span>
+
+    // Angle attack.
+<span class="fc bfc" id="L50" title="All 4 branches covered.">    if (!emptyEnd &amp;&amp; inAnglePosition) {</span>
+<span class="fc" id="L51">      return true;</span>
+    }
+
+    // Start double movement.
+<span class="fc" id="L55">    boolean emptyFront =</span>
+<span class="fc" id="L56">        board.getPiece(new Position(getPosition().x(), getPosition().y() + direction)).isEmpty();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">    if (onStartRow) {</span>
+<span class="pc bpc" id="L58" title="2 of 8 branches missed.">      if (inDoubleFrontRow &amp;&amp; sameColumn &amp;&amp; emptyEnd &amp;&amp; emptyFront) {</span>
+<span class="fc" id="L59">        return true;</span>
+      }
+    }
+
+    // Ordinary movement.
+<span class="fc bfc" id="L64" title="All 6 branches covered.">    if (emptyEnd &amp;&amp; inFrontRow &amp;&amp; sameColumn) {</span>
+<span class="fc" id="L65">      return true;</span>
+    }
+
+<span class="fc" id="L68">    return false;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
