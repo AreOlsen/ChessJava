@@ -16,8 +16,8 @@ public abstract class ChessPiece {
    * @param board ChessBoard board the piece belongs to.
    * @param side The side the piece belongs to.
    */
-<span class="fc" id="L19">  public ChessPiece(ChessBoard board, Position position, ChessSide side)</span>
-      throws IllegalArgumentException {
+  public ChessPiece(ChessBoard board, Position position, ChessSide side)
+<span class="fc" id="L20">      throws IllegalArgumentException {</span>
 <span class="pc bpc" id="L21" title="1 of 2 branches missed.">    if (board == null) {</span>
 <span class="nc" id="L22">      throw new IllegalArgumentException(&quot;Piece can't belong to null board.&quot;);</span>
     }
@@ -124,7 +124,7 @@ public abstract class ChessPiece {
     // Return back to start.
 <span class="pc bpc" id="L125" title="1 of 2 branches missed.">    if (!board.getGrid().movePiece(end, position)) {</span>
 <span class="nc" id="L126">      throw new IllegalStateException(</span>
-<span class="nc" id="L127">          &quot;Error detected: Piece moved during legality simulation not reversed.&quot;);</span>
+          &quot;Error detected: Piece moved during legality simulation not reversed.&quot;);
     }
 
     // Replace captured piece.

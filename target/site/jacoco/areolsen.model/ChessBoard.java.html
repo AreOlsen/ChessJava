@@ -150,7 +150,7 @@ public class ChessBoard implements Iterable&lt;ChessPiece&gt; {
 <span class="fc bfc" id="L150" title="All 2 branches covered.">      if (piece.getSide() == side) {</span>
 <span class="fc" id="L151">        pieces.add(piece);</span>
       }
-    }
+<span class="fc" id="L153">    }</span>
 <span class="fc" id="L154">    return pieces;</span>
   }
 
@@ -225,7 +225,7 @@ public class ChessBoard implements Iterable&lt;ChessPiece&gt; {
 <span class="pc bpc" id="L225" title="1 of 2 branches missed.">      if (piece.movementPattern(king.getPosition())) {</span>
 <span class="nc" id="L226">        return true;</span>
       }
-    }
+<span class="fc" id="L228">    }</span>
 
 <span class="fc" id="L230">    return false;</span>
   }
@@ -245,7 +245,7 @@ public class ChessBoard implements Iterable&lt;ChessPiece&gt; {
 <span class="fc" id="L245">        continue;</span>
       }
 <span class="fc" id="L247">      moveEndingsBlack.addAll(getLegalMoves(piece.getPosition()));</span>
-    }
+<span class="fc" id="L248">    }</span>
 
 <span class="pc bpc" id="L250" title="2 of 4 branches missed.">    if (moveEndingsBlack.isEmpty() || moveEndingsWhite.isEmpty()) {</span>
 <span class="nc" id="L251">      SoundPlayer.playSound(&quot;checkmate.wav&quot;);</span>
@@ -272,7 +272,7 @@ public class ChessBoard implements Iterable&lt;ChessPiece&gt; {
 
 <span class="fc" id="L273">    ChessPiece piece = pieceOpt.get();</span>
 <span class="fc" id="L274">    boolean pawnPieceMoved = piece.getType().equals(&quot;P&quot;);</span>
-<span class="fc" id="L275">    boolean onEndRow =</span>
+    boolean onEndRow =
 <span class="fc bfc" id="L276" title="All 2 branches covered.">        (piece.getSide() == ChessSide.WHITE</span>
 <span class="fc bfc" id="L277" title="All 2 branches covered.">            ? piece.getPosition().y() == board.getHeight() - 1</span>
 <span class="pc bpc" id="L278" title="1 of 2 branches missed.">            : piece.getPosition().y() == 0);</span>
@@ -297,7 +297,7 @@ public class ChessBoard implements Iterable&lt;ChessPiece&gt; {
 <span class="fc" id="L297">    double sum = 0d;</span>
 <span class="fc bfc" id="L298" title="All 2 branches covered.">    for (ChessPiece piece : this) {</span>
 <span class="fc bfc" id="L299" title="All 2 branches covered.">      sum += piece.getSide() == side ? piece.getValue() : -piece.getValue();</span>
-    }
+<span class="fc" id="L300">    }</span>
 <span class="fc" id="L301">    return sum;</span>
   }
 
@@ -309,7 +309,7 @@ public class ChessBoard implements Iterable&lt;ChessPiece&gt; {
 <span class="pc bpc" id="L309" title="1 of 2 branches missed.">      if (piece.isPresent()) {</span>
 <span class="fc" id="L310">        pieces.add(piece.get());</span>
       }
-    }
+<span class="fc" id="L312">    }</span>
 <span class="fc" id="L313">    return pieces.iterator();</span>
   }
 }
