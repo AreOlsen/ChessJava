@@ -28,13 +28,16 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Create Windows EXE
+        shell: pwsh
         run: |
+          $version = mvn help:evaluate "-Dexpression=project.version" "-q" "-DforceStdout"
+
           jpackage `
             --name Chess `
-            --app-version 0.1.0 `
+            --app-version $version `
             --vendor "Are Olsen" `
             --input target `
-            --main-jar chess-0.1.0.jar `
+            --main-jar "chess-$version.jar" `
             --main-class areolsen.App `
             --type exe `
             --dest target/installer
