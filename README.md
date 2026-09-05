@@ -16,6 +16,7 @@ The current game mode is:
 - Standard chess board and pieces.
 - Turn-based gameplay.
 - Legal piece movement and basic chess rules.
+- **Player vs AI** - Player can play against an ai.
 
 ## Screenshots
 
@@ -39,10 +40,8 @@ Current key-binds are:
 
 The project is still under development. Planned improvements include:
 
-- **Minimax chess AI**
-  - Implement a computer opponent using the Minimax algorithm.
+- **Multithreading of Minimax chess AI**
   - Explore a multithreaded implementation to improve search performance.
-  - Allow players to play against the computer.
 
 - **Settings page**
   - Add configurable application settings.
