@@ -49,7 +49,7 @@ public record Position(int x, int y) {
   }
 
   /**
-   * Gets the difference in x value
+   * Gets the difference in x value.
    *
    * @param position Position to compare difference in x against.
    * @return difference in x values.
@@ -59,7 +59,7 @@ public record Position(int x, int y) {
   }
 
   /**
-   * Gets the difference in y value
+   * Gets the difference in y value.
    *
    * @param position Position to compare difference in y against.
    * @return difference in y values.

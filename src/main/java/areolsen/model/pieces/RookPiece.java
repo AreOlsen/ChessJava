@@ -1,19 +1,19 @@
 package areolsen.model.pieces;
 
-import areolsen.model.ChessBoard;
-import areolsen.model.ChessPiece;
-import areolsen.model.ChessSide;
+import areolsen.model.Board;
+import areolsen.model.Piece;
+import areolsen.model.Side;
 import areolsen.model.grid.Position;
 
 /** RookPiece. Can move in any side directions like a straight line. */
-public class RookPiece extends ChessPiece {
+public class RookPiece extends Piece {
   /**
    * Instantiate rook piece by calling chesspiece constructor.
    *
    * @param board ChessBoard the rook piece belongs to.
    * @param side ChessSide the rook piece belongs to.
    */
-  public RookPiece(ChessBoard board, Position position, ChessSide side) {
+  public RookPiece(Board board, Position position, Side side) {
     super(board, position, side);
   }
 

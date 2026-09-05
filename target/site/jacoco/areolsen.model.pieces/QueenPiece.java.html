@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QueenPiece.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.model.pieces</a> &gt; <span class="el_source">QueenPiece.java</span></div><h1>QueenPiece.java</h1><pre class="source lang-java linenums">package areolsen.model.pieces;
 
-import areolsen.model.ChessBoard;
-import areolsen.model.ChessPiece;
-import areolsen.model.ChessSide;
+import areolsen.model.Board;
+import areolsen.model.Piece;
+import areolsen.model.Side;
 import areolsen.model.grid.Position;
 
 /**
@@ -13,14 +13,14 @@ import areolsen.model.grid.Position;
  * @see BishopPiece
  * @see KingPiece
  */
-public class QueenPiece extends ChessPiece {
+public class QueenPiece extends Piece {
   /**
    * Instantiate queen piece by calling chesspiece constructor.
    *
    * @param board ChessBoard the queen piece belongs to.
    * @param side ChessSide the queen piece belongs to.
    */
-  public QueenPiece(ChessBoard board, Position position, ChessSide side) {
+  public QueenPiece(Board board, Position position, Side side) {
 <span class="fc" id="L24">    super(board, position, side);</span>
 <span class="fc" id="L25">  }</span>
 

@@ -1,8 +1,8 @@
 package areolsen.model.pieces;
 
-import areolsen.model.ChessBoard;
-import areolsen.model.ChessPiece;
-import areolsen.model.ChessSide;
+import areolsen.model.Board;
+import areolsen.model.Piece;
+import areolsen.model.Side;
 import areolsen.model.grid.Position;
 
 /**
@@ -13,14 +13,14 @@ import areolsen.model.grid.Position;
  * @see BishopPiece
  * @see KingPiece
  */
-public class QueenPiece extends ChessPiece {
+public class QueenPiece extends Piece {
   /**
    * Instantiate queen piece by calling chesspiece constructor.
    *
    * @param board ChessBoard the queen piece belongs to.
    * @param side ChessSide the queen piece belongs to.
    */
-  public QueenPiece(ChessBoard board, Position position, ChessSide side) {
+  public QueenPiece(Board board, Position position, Side side) {
     super(board, position, side);
   }
 

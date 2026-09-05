@@ -1,19 +1,19 @@
 package areolsen.model.pieces;
 
-import areolsen.model.ChessBoard;
-import areolsen.model.ChessPiece;
-import areolsen.model.ChessSide;
+import areolsen.model.Board;
+import areolsen.model.Piece;
+import areolsen.model.Side;
 import areolsen.model.grid.Position;
 
 /** BishopPiece. Can move diagonally across board. */
-public class BishopPiece extends ChessPiece {
+public class BishopPiece extends Piece {
   /**
    * Instantiate bishop piece by calling chesspiece constructor.
    *
    * @param board ChessBoard the bishop piece belongs to.
    * @param side ChessSide the bishop piece belongs to.
    */
-  public BishopPiece(ChessBoard board, Position position, ChessSide side) {
+  public BishopPiece(Board board, Position position, Side side) {
     super(board, position, side);
   }
 

@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-25-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/cockblocker/Desktop/Programming/Java/chess/target/surefire/surefirebooter-20260902011800706_3.jar /home/cockblocker/Desktop/Programming/Java/chess/target/surefire 2026-09-02T01-18-00_653-jvmRun1 surefire-20260902011800706_1tmp surefire_0-20260902011800706_2tmp"/>
+    <property name="sun.java.command" value="/home/cockblocker/Desktop/Programming/Java/chess/target/surefire/surefirebooter-20260905201933973_3.jar /home/cockblocker/Desktop/Programming/Java/chess/target/surefire 2026-09-05T20-19-33_914-jvmRun1 surefire-20260905201933973_1tmp surefire_0-20260905201933973_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/cockblocker/Desktop/Programming/Java/chess/target/test-classes:/home/cockblocker/Desktop/Programming/Java/chess/target/classes:/home/cockblocker/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.0/junit-jupiter-api-5.11.0.jar:/home/cockblocker/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/cockblocker/.m2/repository/org/junit/platform/junit-platform-commons/1.11.0/junit-platform-commons-1.11.0.jar:/home/cockblocker/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/cockblocker/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.0/junit-jupiter-params-5.11.0.jar:/home/cockblocker/.m2/repository/org/mockito/mockito-core/2.17.0/mockito-core-2.17.0.jar:/home/cockblocker/.m2/repository/net/bytebuddy/byte-buddy/1.8.0/byte-buddy-1.8.0.jar:/home/cockblocker/.m2/repository/net/bytebuddy/byte-buddy-agent/1.8.0/byte-buddy-agent-1.8.0.jar:/home/cockblocker/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,13 +27,13 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/cockblocker/Desktop/Programming/Java/chess/target/surefire/surefirebooter-20260902011800706_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/cockblocker/Desktop/Programming/Java/chess/target/surefire/surefirebooter-20260905201933973_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.4+7-1-26.04-Ubuntu"/>
     <property name="user.name" value="cockblocker"/>
     <property name="stdout.encoding" value="UTF-8"/>
     <property name="path.separator" value=":"/>
-    <property name="os.version" value="7.0.0-30-generic"/>
+    <property name="os.version" value="7.0.0-31-generic"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
@@ -57,8 +57,8 @@
   <testcase name="testQueenGetValue" classname="areolsen.model.pieces.QueenPieceTest" time="0.001"/>
   <testcase name="testQueenGetType" classname="areolsen.model.pieces.QueenPieceTest" time="0.001"/>
   <testcase name="testQueenCannotJumpOverPieces" classname="areolsen.model.pieces.QueenPieceTest" time="0.001"/>
-  <testcase name="testQueenBlockedByPieces" classname="areolsen.model.pieces.QueenPieceTest" time="0.001"/>
+  <testcase name="testQueenBlockedByPieces" classname="areolsen.model.pieces.QueenPieceTest" time="0.0"/>
   <testcase name="testQueenDiagonalMove" classname="areolsen.model.pieces.QueenPieceTest" time="0.001"/>
-  <testcase name="testQueenHorizontalMove" classname="areolsen.model.pieces.QueenPieceTest" time="0.001"/>
+  <testcase name="testQueenHorizontalMove" classname="areolsen.model.pieces.QueenPieceTest" time="0.0"/>
   <testcase name="testQueenVerticalMove" classname="areolsen.model.pieces.QueenPieceTest" time="0.001"/>
 </testsuite>

@@ -1,15 +1,15 @@
 package areolsen.model.pieces;
 
-import areolsen.model.ChessBoard;
-import areolsen.model.ChessPiece;
-import areolsen.model.ChessSide;
+import areolsen.model.Board;
+import areolsen.model.Piece;
+import areolsen.model.Side;
 import areolsen.model.grid.Position;
 
 /**
  * PawnPiece. The pawn piece typically can move 1 step forward. Attack diagonally forward. On first
  * step it can move 2 cells forward.
  */
-public class PawnPiece extends ChessPiece {
+public class PawnPiece extends Piece {
 
   /**
    * Instantiate pawn piece by calling chesspiece constructor.
@@ -17,7 +17,7 @@ public class PawnPiece extends ChessPiece {
    * @param board ChessBoard the pawn piece belongs to.
    * @param side ChessSide the pawn piece belongs to.
    */
-  public PawnPiece(ChessBoard board, Position position, ChessSide side) {
+  public PawnPiece(Board board, Position position, Side side) {
     super(board, position, side);
   }
 
@@ -33,7 +33,7 @@ public class PawnPiece extends ChessPiece {
 
   @Override
   protected boolean movementPattern(Position end) {
-    int direction = getSide() == ChessSide.WHITE ? 1 : -1;
+    int direction = getSide() == Side.WHITE ? 1 : -1;
 
     boolean emptyEnd = board.getPiece(end).isEmpty();
     boolean sameColumn = end.x() == getPosition().x();
@@ -42,7 +42,7 @@ public class PawnPiece extends ChessPiece {
     boolean inAnglePosition =
         inFrontRow && (end.x() == getPosition().x() - 1 || end.x() == getPosition().x() + 1);
     boolean onStartRow =
-        getSide() == ChessSide.WHITE
+        getSide() == Side.WHITE
             ? getPosition().y() == 1
             : getPosition().y() == board.getHeight() - 2;
 

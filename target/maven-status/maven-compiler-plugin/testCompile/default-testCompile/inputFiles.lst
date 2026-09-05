@@ -1,6 +1,7 @@
+/home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/controller/MinMaxControllerTest.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/controller/PvPControllerTest.java
-/home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/model/ChessBoardTest.java
-/home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/model/ChessPieceTest.java
+/home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/model/BoardTest.java
+/home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/model/PieceTest.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/model/grid/HashGridTest.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/model/grid/PositionTest.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/test/java/areolsen/model/pieces/BishopPieceTest.java

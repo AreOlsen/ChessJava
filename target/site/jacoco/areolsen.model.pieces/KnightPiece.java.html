@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KnightPiece.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.model.pieces</a> &gt; <span class="el_source">KnightPiece.java</span></div><h1>KnightPiece.java</h1><pre class="source lang-java linenums">package areolsen.model.pieces;
 
-import areolsen.model.ChessBoard;
-import areolsen.model.ChessPiece;
-import areolsen.model.ChessSide;
+import areolsen.model.Board;
+import areolsen.model.Piece;
+import areolsen.model.Side;
 import areolsen.model.grid.Position;
 
 /**
  * KnightPiece. The knight piece can move in an L shape - 2 cells in any direction and 1cell to the
  * side.
  */
-public class KnightPiece extends ChessPiece {
+public class KnightPiece extends Piece {
   /**
    * Instantiate knight piece by calling chesspiece constructor.
    *
    * @param board ChessBoard the knight piece belongs to.
    * @param side ChessSide the knight piece belongs to.
    */
-  public KnightPiece(ChessBoard board, Position position, ChessSide side) {
+  public KnightPiece(Board board, Position position, Side side) {
 <span class="fc" id="L20">    super(board, position, side);</span>
 <span class="fc" id="L21">  }</span>
 

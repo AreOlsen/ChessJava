@@ -27,7 +27,7 @@ public class MenuView extends View {
     add(Box.createVerticalStrut(30));
     addButton("Player vs Player", e -> handler.changeActiveView("pvp"));
     add(Box.createVerticalStrut(30));
-    // addButton("Player vs AI", e -> handler.changeActiveView("minmax"));
+    addButton("Player vs AI", e -> handler.changeActiveView("minmax"));
     add(Box.createVerticalGlue());
   }
 

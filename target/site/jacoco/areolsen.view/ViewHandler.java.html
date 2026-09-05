@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ViewHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.view</a> &gt; <span class="el_source">ViewHandler.java</span></div><h1>ViewHandler.java</h1><pre class="source lang-java linenums">package areolsen.view;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JFrame;
+
+/**
+ * ViewHandler. Stores and handles views. There is one active view shown at a time. Composes a
+ * JFrame window upon which the active view is drawn.
+ *
+ * @see View
+ * @see JFrame
+ */
+public class ViewHandler {
+<span class="nc" id="L17">  private JFrame window = new JFrame(&quot;Chess&quot;);</span>
+<span class="nc" id="L18">  private Map&lt;String, View&gt; views = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L19">  private String activeView = &quot;&quot;;</span>
+
+<span class="nc" id="L21">  private static final Dimension MINIMUM_SCREEN_SIZE = new Dimension(300, 300);</span>
+
+  /**
+   * Initializes new ViewHandler with a starter view with viewName argument.
+   *
+   * @param viewName Start active view name.
+   * @param startView Start active view View.
+   */
+<span class="nc" id="L29">  public ViewHandler(String viewName, View startView) {</span>
+<span class="nc" id="L30">    this.activeView = viewName;</span>
+<span class="nc" id="L31">    initializeWindow();</span>
+<span class="nc" id="L32">    addView(viewName, startView);</span>
+<span class="nc" id="L33">  }</span>
+
+  /** Initialize empty ViewHandler. Has no active view and is essentially an empty JFrame. */
+<span class="nc" id="L36">  public ViewHandler() {</span>
+<span class="nc" id="L37">    initializeWindow();</span>
+<span class="nc" id="L38">  }</span>
+
+  /** Initializes JFrame window with default window params. */
+  private void initializeWindow() {
+<span class="nc" id="L42">    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L43">    window.setLocationRelativeTo(null); // Center the window</span>
+<span class="nc" id="L44">    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();</span>
+<span class="nc" id="L45">    window.setSize((int) screenSize.getHeight(), (int) screenSize.getHeight());</span>
+<span class="nc" id="L46">    window.setVisible(true);</span>
+<span class="nc" id="L47">    window.setMinimumSize(MINIMUM_SCREEN_SIZE);</span>
+<span class="nc" id="L48">  }</span>
+
+  /**
+   * Adds a view with associated viewName.
+   *
+   * @param viewName The name of view, for example, &quot;Menu&quot;
+   * @param view Actual view.
+   * @throws IllegalArgumentException Existing view with viewName argument stored.
+   */
+  public void addView(String viewName, View view) throws IllegalArgumentException {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">    if (views.containsKey(viewName)) {</span>
+<span class="nc" id="L59">      throw new IllegalArgumentException(&quot;Existing view with name&quot;);</span>
+    }
+<span class="nc" id="L61">    views.put(viewName, view);</span>
+<span class="nc" id="L62">    view.setVisible(false);</span>
+<span class="nc" id="L63">  }</span>
+
+  /**
+   * Gets view with associated viewName argument.
+   *
+   * @param viewName Name of view to retrieve.
+   * @return View Instantiated view with associated viewName.
+   * @throws IllegalArgumentException No view with viewName exists.
+   */
+  public View getView(String viewName) throws IllegalArgumentException {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">    if (!views.containsKey(viewName)) {</span>
+<span class="nc" id="L74">      throw new IllegalArgumentException(&quot;View does not exist.&quot;);</span>
+    }
+<span class="nc" id="L76">    return views.get(viewName);</span>
+  }
+
+  /**
+   * Gets the active view that is being displayed.
+   *
+   * @return Active view displayed.
+   */
+  public View getActiveView() {
+<span class="nc" id="L85">    return getView(activeView);</span>
+  }
+
+  /**
+   * Removes stored view with viewName argument.
+   *
+   * @param viewName Name of view to remove.
+   * @throws IllegalArgumentException No view stored with viewName argument.
+   */
+  public void removeView(String viewName) throws IllegalArgumentException {
+<span class="nc bnc" id="L95" title="All 2 branches missed.">    if (!views.containsKey(viewName)) {</span>
+<span class="nc" id="L96">      throw new IllegalArgumentException(&quot;Does not have view with viewName argument&quot;);</span>
+    }
+<span class="nc bnc" id="L98" title="All 2 branches missed.">    if (viewName.equals(activeView)) {</span>
+<span class="nc" id="L99">      throw new IllegalArgumentException(&quot;Can not remove active view&quot;);</span>
+    }
+
+<span class="nc" id="L102">    views.remove(viewName);</span>
+<span class="nc" id="L103">  }</span>
+
+  /**
+   * Changes the actively displayed view to stored view with viewName argument.
+   *
+   * @param viewName Name of view to change to.
+   * @throws IllegalArgumentException No view with stored viewName argument.
+   */
+  public void changeActiveView(String viewName) throws IllegalArgumentException {
+<span class="nc bnc" id="L112" title="All 2 branches missed.">    if (!views.containsKey(viewName)) {</span>
+<span class="nc" id="L113">      throw new IllegalArgumentException(&quot;Not valid viewname&quot;);</span>
+    }
+
+<span class="nc bnc" id="L116" title="All 2 branches missed.">    if (viewName.equals(activeView)) {</span>
+<span class="nc" id="L117">      return;</span>
+    }
+
+    // Get, stop,  remove active view.
+<span class="nc" id="L121">    View currentView = views.get(activeView);</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">    if (currentView != null) {</span>
+<span class="nc" id="L123">      currentView.onStop();</span>
+<span class="nc" id="L124">      currentView.setVisible(false);</span>
+<span class="nc" id="L125">      window.remove(currentView);</span>
+    }
+
+    // Update active view to new.
+<span class="nc" id="L129">    activeView = viewName;</span>
+<span class="nc" id="L130">    View newView = views.get(viewName);</span>
+
+    // Add and start up new view.
+<span class="nc" id="L133">    window.add(newView);</span>
+<span class="nc" id="L134">    newView.onStart();</span>
+<span class="nc" id="L135">    newView.setVisible(true);</span>
+<span class="nc" id="L136">    newView.setFocusable(true);</span>
+<span class="nc" id="L137">    newView.requestFocusInWindow();</span>
+<span class="nc" id="L138">    window.revalidate();</span>
+<span class="nc" id="L139">    window.repaint();</span>
+<span class="nc" id="L140">  }</span>
+
+  /**
+   * Gets Dimension size of JFrame window measured in pixels.
+   *
+   * @return Dimension of Window.
+   * @see Dimension
+   */
+  public Dimension getWindowDimension() {
+<span class="nc" id="L149">    return window.getSize();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

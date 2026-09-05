@@ -1,9 +1,10 @@
 package areolsen.view;
 
 import areolsen.controller.Controller;
-import areolsen.model.ChessBoard;
-import areolsen.model.ChessPiece;
-import areolsen.model.ChessSide;
+import areolsen.model.Board;
+import areolsen.model.Move;
+import areolsen.model.Piece;
+import areolsen.model.Side;
 import areolsen.model.grid.Position;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -13,7 +14,7 @@ import java.util.Optional;
 /** ChessView View that renders of game logic. */
 public class ChessView extends View {
   private final Controller controller;
-  private final ChessBoard board;
+  private final Board board;
   private final ViewHandler handler;
 
   private static final Color CELL_COLOR_GRAY = new Color(125, 135, 150);
@@ -28,7 +29,7 @@ public class ChessView extends View {
    * @param controller Controller that handles game input logic.
    * @param board ChessBoard to play chess on.
    */
-  public ChessView(ViewHandler handler, Controller controller, ChessBoard board) {
+  public ChessView(ViewHandler handler, Controller controller, Board board) {
     this.board = board;
     this.controller = controller;
     this.addKeyListener(controller);
@@ -45,7 +46,7 @@ public class ChessView extends View {
   /** Checks if the game has finished. If so, reset the board for a replay, and change to menu. */
   @Override
   public void update() {
-    if (board.gameOver()) {
+    if (board.gameOver(true)) {
       board.reset();
       handler.changeActiveView("gameover");
     }
@@ -76,9 +77,9 @@ public class ChessView extends View {
     final int cellWidth = getWidth() / board.getWidth();
     final int cellHeight = getHeight() / board.getHeight();
 
-    for (ChessPiece piece : board) {
+    for (Piece piece : board) {
       String filename =
-          "pieces/" + (piece.getSide() == ChessSide.WHITE ? "w" : "b") + piece.getType() + ".png";
+          "pieces/" + (piece.getSide() == Side.WHITE ? "w" : "b") + piece.getType() + ".png";
       int xPosition = piece.getPosition().x() * cellWidth;
       int yPosition = getHeight() - (piece.getPosition().y() + 1) * cellHeight;
       renderImage(g2, filename, xPosition, yPosition, cellWidth, cellHeight);
@@ -96,18 +97,18 @@ public class ChessView extends View {
     }
 
     // Get side move colour.
-    List<Position> endPositions = board.getLegalMoves(activePosition.get());
+    List<Move> moves = board.getLegalMoves(activePosition.get());
     g2.setColor(CELL_COLOR_INVALID_MOVE);
 
-    Optional<ChessPiece> piece = board.getPiece(activePosition.get());
+    Optional<Piece> piece = board.getPiece(activePosition.get());
     if (piece.isPresent() && piece.get().getSide().equals(board.getSide())) {
       g2.setColor(CELL_COLOR_VALID_MOVE);
     }
 
     // Draw moves.
-    for (Position position : endPositions) {
-      int xPosition = position.x() * cellWidth;
-      int yPosition = getHeight() - (position.y() + 1) * cellHeight;
+    for (Move move : moves) {
+      int xPosition = move.end().x() * cellWidth;
+      int yPosition = getHeight() - (move.end().y() + 1) * cellHeight;
       g2.fillRect(xPosition, yPosition, cellWidth, cellHeight);
     }
   }

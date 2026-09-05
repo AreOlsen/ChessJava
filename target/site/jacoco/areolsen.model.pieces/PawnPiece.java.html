@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PawnPiece.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.model.pieces</a> &gt; <span class="el_source">PawnPiece.java</span></div><h1>PawnPiece.java</h1><pre class="source lang-java linenums">package areolsen.model.pieces;
 
-import areolsen.model.ChessBoard;
-import areolsen.model.ChessPiece;
-import areolsen.model.ChessSide;
+import areolsen.model.Board;
+import areolsen.model.Piece;
+import areolsen.model.Side;
 import areolsen.model.grid.Position;
 
 /**
  * PawnPiece. The pawn piece typically can move 1 step forward. Attack diagonally forward. On first
  * step it can move 2 cells forward.
  */
-public class PawnPiece extends ChessPiece {
+public class PawnPiece extends Piece {
 
   /**
    * Instantiate pawn piece by calling chesspiece constructor.
@@ -17,7 +17,7 @@ public class PawnPiece extends ChessPiece {
    * @param board ChessBoard the pawn piece belongs to.
    * @param side ChessSide the pawn piece belongs to.
    */
-  public PawnPiece(ChessBoard board, Position position, ChessSide side) {
+  public PawnPiece(Board board, Position position, Side side) {
 <span class="fc" id="L21">    super(board, position, side);</span>
 <span class="fc" id="L22">  }</span>
 
@@ -33,7 +33,7 @@ public class PawnPiece extends ChessPiece {
 
   @Override
   protected boolean movementPattern(Position end) {
-<span class="fc bfc" id="L36" title="All 2 branches covered.">    int direction = getSide() == ChessSide.WHITE ? 1 : -1;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">    int direction = getSide() == Side.WHITE ? 1 : -1;</span>
 
 <span class="fc" id="L38">    boolean emptyEnd = board.getPiece(end).isEmpty();</span>
 <span class="fc bfc" id="L39" title="All 2 branches covered.">    boolean sameColumn = end.x() == getPosition().x();</span>
@@ -42,7 +42,7 @@ public class PawnPiece extends ChessPiece {
 <span class="fc bfc" id="L42" title="All 2 branches covered.">    boolean inAnglePosition =</span>
 <span class="fc bfc" id="L43" title="All 4 branches covered.">        inFrontRow &amp;&amp; (end.x() == getPosition().x() - 1 || end.x() == getPosition().x() + 1);</span>
     boolean onStartRow =
-<span class="fc bfc" id="L45" title="All 2 branches covered.">        getSide() == ChessSide.WHITE</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        getSide() == Side.WHITE</span>
 <span class="fc bfc" id="L46" title="All 2 branches covered.">            ? getPosition().y() == 1</span>
 <span class="fc bfc" id="L47" title="All 2 branches covered.">            : getPosition().y() == board.getHeight() - 2;</span>
 

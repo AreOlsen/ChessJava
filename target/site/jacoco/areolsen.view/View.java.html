@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>View.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.view</a> &gt; <span class="el_source">View.java</span></div><h1>View.java</h1><pre class="source lang-java linenums">package areolsen.view;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+/**
+ * Abstract view class which extends JPanel. Can be stored in ViewHandler. Can be drawn on a JFrame
+ * instance. Includes undefined abstract functions: onStart, onStop, update, render.
+ *
+ * @see ViewHandler.
+ */
+<span class="nc" id="L24">public abstract class View extends JPanel {</span>
+<span class="nc" id="L25">  protected final Map&lt;String, Image&gt; imageMap = new HashMap&lt;&gt;();</span>
+
+  /**
+   * Hook that gets run when ViewHandler sets View as active.
+   *
+   * @see ViewHandler
+   */
+  protected abstract void onStart();
+
+  /** Hook for logic updating each time a frame is run. */
+  protected abstract void update();
+
+  /**
+   * Hook that gets run when ViewHandler changes from this to another active view.
+   *
+   * @see ViewHandler
+   */
+  protected abstract void onStop();
+
+  /**
+   * Overridable render view function. Hooks into paintComponent by JPanel.
+   *
+   * @param g2 Graphics2D object that stuff gets rendered upon.
+   * @see paintComponent(...)
+   */
+  protected abstract void render(Graphics2D g2);
+
+  @Override
+  public void paintComponent(Graphics g) {
+<span class="nc" id="L54">    update();</span>
+<span class="nc" id="L55">    render((Graphics2D) g);</span>
+<span class="nc" id="L56">  }</span>
+
+  /**
+   * Draws image stored at filepath relative to resources folder.
+   *
+   * @param g2 Graphics2D object to draw with. Draws from top-left corner of image.
+   * @param filepath Filepath of image relative to resources folder.
+   * @param x x position on screen from left.
+   * @param y y position on screen from top.
+   * @param width Width to draw image with.
+   * @param height Height to draw image with.
+   */
+  protected void renderImage(Graphics2D g2, String filepath, int x, int y, int width, int height) {
+    try {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">      if (!imageMap.containsKey(filepath)) {</span>
+<span class="nc" id="L71">        imageMap.put(filepath, ImageIO.read(new File(&quot;src/main/resources/&quot; + filepath)));</span>
+      }
+
+<span class="nc" id="L74">      Image image = imageMap.get(filepath);</span>
+<span class="nc" id="L75">      g2.drawImage(image, x, y, width, height, null);</span>
+<span class="nc" id="L76">    } catch (Exception e) {</span>
+<span class="nc" id="L77">      System.out.println(&quot;Failure in drawing image. Error:&quot; + e.toString());</span>
+<span class="nc" id="L78">    }</span>
+<span class="nc" id="L79">  }</span>
+
+  /**
+   * Draws an background image stored relative to resources/backgrounds/ Background image fills
+   * entire screen. Calls renderImage function.
+   *
+   * @see renderImage(...)
+   * @param g2 Graphics2D object to draw upon.
+   * @param backgroundPath Path of background image stored relative to resources/backgrounds.
+   */
+  protected void renderBackground(Graphics2D g2, String backgroundPath) {
+<span class="nc" id="L90">    renderImage(g2, &quot;backgrounds/&quot; + backgroundPath, 0, 0, getWidth(), getHeight());</span>
+<span class="nc" id="L91">  }</span>
+
+  /**
+   * Adds text JLabel.
+   *
+   * @param text Text to render.
+   * @param fontSize Size of text.
+   */
+  protected void addText(String text, int fontSize) {
+<span class="nc" id="L100">    JLabel label = new JLabel(text, JLabel.CENTER);</span>
+<span class="nc" id="L101">    label.setFont(new Font(&quot;Arial&quot;, Font.BOLD, fontSize));</span>
+<span class="nc" id="L102">    label.setAlignmentX(Component.CENTER_ALIGNMENT);</span>
+<span class="nc" id="L103">    label.setForeground(Color.WHITE);</span>
+<span class="nc" id="L104">    add(label);</span>
+<span class="nc" id="L105">  }</span>
+
+  /**
+   * Adds button with text, actionListener, with predefined settings.
+   *
+   * @param text Text inside button.
+   * @param actionListener Action to do upon button click.
+   */
+  protected void addButton(String text, ActionListener actionListener) {
+<span class="nc" id="L114">    JButton button = new JButton(text);</span>
+
+<span class="nc" id="L116">    button.setFocusPainted(false);</span>
+<span class="nc" id="L117">    button.setOpaque(false);</span>
+<span class="nc" id="L118">    button.setContentAreaFilled(false);</span>
+<span class="nc" id="L119">    button.setBorderPainted(false);</span>
+<span class="nc" id="L120">    button.setForeground(Color.WHITE);</span>
+<span class="nc" id="L121">    button.setBorderPainted(false);</span>
+<span class="nc" id="L122">    button.setFont(new Font(&quot;Arial&quot;, Font.BOLD, 20));</span>
+<span class="nc" id="L123">    button.addActionListener(actionListener);</span>
+<span class="nc" id="L124">    button.setAlignmentX(Component.CENTER_ALIGNMENT);</span>
+
+<span class="nc" id="L126">    add(button);</span>
+<span class="nc" id="L127">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

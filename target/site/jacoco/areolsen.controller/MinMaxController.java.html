@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MinMaxController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.controller</a> &gt; <span class="el_source">MinMaxController.java</span></div><h1>MinMaxController.java</h1><pre class="source lang-java linenums">package areolsen.controller;
+
+import areolsen.model.Board;
+import areolsen.model.Move;
+import areolsen.model.Piece;
+import areolsen.model.Side;
+import areolsen.model.grid.Position;
+import areolsen.view.ViewHandler;
+import java.util.List;
+import java.util.Optional;
+
+/** MinMaxController */
+public class MinMaxController extends Controller {
+  private final int searchDepth;
+  private Board boardClone;
+  private Position bestStart;
+  private Position bestEnd;
+
+  /**
+   * Instantiate new player vs ai controller.
+   *
+   * @param handler ViewHandler reference for escaping to menu.
+   * @param board ChessBoard reference for game state logic controller handling.
+   */
+  public MinMaxController(Board board, ViewHandler viewHandler, int searchDepth) {
+<span class="fc" id="L26">    super(viewHandler, board);</span>
+<span class="fc" id="L27">    this.searchDepth = searchDepth;</span>
+<span class="fc" id="L28">    this.boardClone = board.clone();</span>
+<span class="fc" id="L29">  }</span>
+
+  /**
+   * Click hook for PvAI game mode that allows player moves, followed by the ai moves immediately
+   * after.
+   *
+   * @see Controller#mouseClicked
+   */
+  @Override
+  public void clickHook(Optional&lt;Position&gt; originalPosition, Position newPosition) {
+<span class="fc bfc" id="L39" title="All 2 branches covered.">    if (board.getSide() != Side.WHITE) {</span>
+<span class="fc" id="L40">      return;</span>
+    }
+
+    // If no cell selected update actively chosen cell.
+<span class="fc bfc" id="L44" title="All 2 branches covered.">    if (originalPosition.isEmpty()) {</span>
+<span class="fc" id="L45">      super.clickHook(originalPosition, newPosition);</span>
+<span class="fc" id="L46">      return;</span>
+    }
+
+    // If white -&gt; move.
+<span class="fc" id="L50">    Optional&lt;Move&gt; move = board.movePiece(originalPosition.get(), newPosition, true);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">    if (move.isPresent()) {</span>
+<span class="fc" id="L52">      activeChosenPosition = Optional.empty();</span>
+
+      // If we moved perform AI's move.
+<span class="fc" id="L55">      boardClone = board.clone();</span>
+<span class="fc" id="L56">      findBestMove(this.searchDepth, Side.BLACK);</span>
+<span class="pc bpc" id="L57" title="2 of 4 branches missed.">      if (bestStart == null || bestEnd == null) {</span>
+<span class="nc" id="L58">        board.changeSide();</span>
+<span class="nc" id="L59">        return;</span>
+      }
+<span class="fc" id="L61">      board.movePiece(bestStart, bestEnd, true);</span>
+<span class="fc" id="L62">      return;</span>
+    }
+
+    // If couldnt move just update.
+<span class="fc" id="L66">    super.clickHook(originalPosition, newPosition);</span>
+<span class="fc" id="L67">  }</span>
+
+  // Finds the best move to follow the player by.
+  private void findBestMove(int depth, Side side) {
+<span class="fc" id="L71">    List&lt;Move&gt; legalMoves = board.getAllLegalMoves(side);</span>
+<span class="fc" id="L72">    double bestEvaluation = Double.MIN_VALUE;</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">    for (Move move : legalMoves) {</span>
+<span class="fc" id="L74">      double evaluation =</span>
+<span class="fc" id="L75">          simulateMove(</span>
+<span class="fc" id="L76">              move.start(), move.end(), depth - 1, Integer.MIN_VALUE, Integer.MAX_VALUE, side);</span>
+
+<span class="pc bpc" id="L78" title="1 of 4 branches missed.">      if (bestStart == null || evaluation &gt;= bestEvaluation) {</span>
+<span class="fc" id="L79">        bestStart = move.start();</span>
+<span class="fc" id="L80">        bestEnd = move.end();</span>
+<span class="fc" id="L81">        bestEvaluation = evaluation;</span>
+      }
+<span class="fc" id="L83">    }</span>
+<span class="fc" id="L84">  }</span>
+
+  // Simulates a move on the cloned board.
+  private double simulateMove(
+      Position start, Position end, int depth, double alpha, double beta, Side side) {
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">    Side opponentSide = side.equals(Side.WHITE) ? Side.BLACK : Side.WHITE;</span>
+
+<span class="fc" id="L91">    Optional&lt;Piece&gt; startPieceOpt = board.getPiece(start);</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">    if (startPieceOpt.isEmpty()) {</span>
+<span class="nc" id="L93">      return 0d;</span>
+    }
+
+<span class="fc" id="L96">    Optional&lt;Move&gt; move = boardClone.movePiece(start, end, false);</span>
+<span class="fc" id="L97">    double evaluation = minmaxEvaluate(depth - 1, alpha, beta, opponentSide);</span>
+
+<span class="fc bfc" id="L99" title="All 2 branches covered.">    if (move.isPresent()) {</span>
+<span class="fc" id="L100">      boardClone.undoMove(move.get(), false);</span>
+    }
+<span class="fc" id="L102">    return evaluation;</span>
+  }
+
+  // Evalute the board for each possible positioning up to depth, and return highest evaluation.
+  private double minmaxEvaluate(int depth, double alpha, double beta, Side side) {
+<span class="pc bpc" id="L107" title="3 of 4 branches missed.">    if (depth &lt;= 0 || this.boardClone.gameOver(false)) {</span>
+<span class="fc" id="L108">      return boardClone.getBoardValue(side);</span>
+    }
+
+<span class="nc" id="L111">    List&lt;Move&gt; legalMoves = boardClone.getAllLegalMoves(side);</span>
+
+<span class="nc bnc" id="L113" title="All 2 branches missed.">    if (side.equals(Side.BLACK)) {</span>
+<span class="nc" id="L114">      double maxEvaluation = Double.MIN_VALUE;</span>
+
+<span class="nc bnc" id="L116" title="All 2 branches missed.">      for (Move move : legalMoves) {</span>
+<span class="nc" id="L117">        maxEvaluation =</span>
+<span class="nc" id="L118">            Math.max(</span>
+<span class="nc" id="L119">                simulateMove(move.start(), move.end(), depth, alpha, beta, side), maxEvaluation);</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (maxEvaluation &gt;= beta) {</span>
+<span class="nc" id="L121">          break;</span>
+        }
+
+<span class="nc" id="L124">        alpha = Math.max(alpha, maxEvaluation);</span>
+<span class="nc" id="L125">      }</span>
+<span class="nc" id="L126">      return maxEvaluation;</span>
+    } else {
+<span class="nc" id="L128">      double minEvaluation = Double.MAX_VALUE;</span>
+
+<span class="nc bnc" id="L130" title="All 2 branches missed.">      for (Move move : legalMoves) {</span>
+<span class="nc" id="L131">        minEvaluation =</span>
+<span class="nc" id="L132">            Math.min(</span>
+<span class="nc" id="L133">                simulateMove(move.start(), move.end(), depth, alpha, beta, side), minEvaluation);</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if (minEvaluation &lt;= alpha) {</span>
+<span class="nc" id="L135">          break;</span>
+        }
+
+<span class="nc" id="L138">        beta = Math.min(beta, minEvaluation);</span>
+<span class="nc" id="L139">      }</span>
+<span class="nc" id="L140">      return minEvaluation;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

@@ -1,6 +1,6 @@
 package areolsen.controller;
 
-import areolsen.model.ChessBoard;
+import areolsen.model.Board;
 import areolsen.model.grid.Position;
 import areolsen.view.ViewHandler;
 import java.awt.Dimension;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public abstract class Controller implements KeyListener, MouseListener {
   protected Optional<Position> activeChosenPosition = Optional.empty();
   private ViewHandler handler;
-  protected ChessBoard board;
+  protected Board board;
 
   /**
    * Construct new controller.
@@ -22,7 +22,7 @@ public abstract class Controller implements KeyListener, MouseListener {
    * @param handler viewhandler reference.
    * @param board chessboard reference.
    */
-  public Controller(ViewHandler handler, ChessBoard board) {
+  public Controller(ViewHandler handler, Board board) {
     this.handler = handler;
     this.board = board;
   }

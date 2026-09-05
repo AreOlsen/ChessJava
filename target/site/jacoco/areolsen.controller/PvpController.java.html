@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PvpController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.controller</a> &gt; <span class="el_source">PvpController.java</span></div><h1>PvpController.java</h1><pre class="source lang-java linenums">package areolsen.controller;
 
-import areolsen.model.ChessBoard;
+import areolsen.model.Board;
+import areolsen.model.Move;
 import areolsen.model.grid.Position;
 import areolsen.view.ViewHandler;
 import java.util.Optional;
@@ -14,9 +15,9 @@ public class PvpController extends Controller {
    * @param handler ViewHandler reference for escaping to menu.
    * @param board ChessBoard reference for game state logic controller handling.
    */
-  public PvpController(ViewHandler handler, ChessBoard board) {
-<span class="nc" id="L18">    super(handler, board);</span>
-<span class="nc" id="L19">  }</span>
+  public PvpController(ViewHandler handler, Board board) {
+<span class="nc" id="L19">    super(handler, board);</span>
+<span class="nc" id="L20">  }</span>
 
   /**
    * Click hook for PvP game mode that only allows the current side to move a piece.
@@ -25,18 +26,21 @@ public class PvpController extends Controller {
    */
   @Override
   protected void clickHook(Optional&lt;Position&gt; originalPosition, Position newPosition) {
-<span class="nc bnc" id="L28" title="All 2 branches missed.">    if (originalPosition.isEmpty()) {</span>
-<span class="nc" id="L29">      super.clickHook(originalPosition, newPosition);</span>
-<span class="nc" id="L30">      return;</span>
+    // If no cell selected update actively chosen cell.
+<span class="nc bnc" id="L30" title="All 2 branches missed.">    if (originalPosition.isEmpty()) {</span>
+<span class="nc" id="L31">      super.clickHook(originalPosition, newPosition);</span>
+<span class="nc" id="L32">      return;</span>
     }
 
-<span class="nc" id="L33">    boolean moved = board.movePiece(originalPosition.get(), newPosition);</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">    if (moved) {</span>
-<span class="nc" id="L35">      activeChosenPosition = Optional.empty();</span>
-<span class="nc" id="L36">      return;</span>
+    // If cell was selected, and move was legal, perform it.
+<span class="nc" id="L36">    Optional&lt;Move&gt; move = board.movePiece(originalPosition.get(), newPosition, true);</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">    if (move.isPresent()) {</span>
+<span class="nc" id="L38">      activeChosenPosition = Optional.empty();</span>
+<span class="nc" id="L39">      return;</span>
     }
 
-<span class="nc" id="L39">    super.clickHook(originalPosition, newPosition);</span>
-<span class="nc" id="L40">  }</span>
+    // If couldn't move, just update actively chosen cell.
+<span class="nc" id="L43">    super.clickHook(originalPosition, newPosition);</span>
+<span class="nc" id="L44">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

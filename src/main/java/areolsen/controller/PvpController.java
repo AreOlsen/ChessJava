@@ -1,6 +1,7 @@
 package areolsen.controller;
 
-import areolsen.model.ChessBoard;
+import areolsen.model.Board;
+import areolsen.model.Move;
 import areolsen.model.grid.Position;
 import areolsen.view.ViewHandler;
 import java.util.Optional;
@@ -14,7 +15,7 @@ public class PvpController extends Controller {
    * @param handler ViewHandler reference for escaping to menu.
    * @param board ChessBoard reference for game state logic controller handling.
    */
-  public PvpController(ViewHandler handler, ChessBoard board) {
+  public PvpController(ViewHandler handler, Board board) {
     super(handler, board);
   }
 
@@ -25,17 +26,20 @@ public class PvpController extends Controller {
    */
   @Override
   protected void clickHook(Optional<Position> originalPosition, Position newPosition) {
+    // If no cell selected update actively chosen cell.
     if (originalPosition.isEmpty()) {
       super.clickHook(originalPosition, newPosition);
       return;
     }
 
-    boolean moved = board.movePiece(originalPosition.get(), newPosition);
-    if (moved) {
+    // If cell was selected, and move was legal, perform it.
+    Optional<Move> move = board.movePiece(originalPosition.get(), newPosition, true);
+    if (move.isPresent()) {
       activeChosenPosition = Optional.empty();
       return;
     }
 
+    // If couldn't move, just update actively chosen cell.
     super.clickHook(originalPosition, newPosition);
   }
 }

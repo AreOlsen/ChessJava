@@ -1,9 +1,11 @@
 /home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/App.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/controller/Controller.java
+/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/controller/MinMaxController.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/controller/PvpController.java
-/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/ChessBoard.java
-/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/ChessPiece.java
-/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/ChessSide.java
+/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/Board.java
+/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/Move.java
+/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/Piece.java
+/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/Side.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/grid/Grid.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/grid/HashGrid.java
 /home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/grid/Position.java

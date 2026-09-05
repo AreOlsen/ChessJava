@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="14.0.0">
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/view/ChessView.java">
+<error line="69" column="13" severity="warning" message="Local variable name &apos;xPosition&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="70" column="13" severity="warning" message="Local variable name &apos;yPosition&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="83" column="11" severity="warning" message="Local variable name &apos;xPosition&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="84" column="11" severity="warning" message="Local variable name &apos;yPosition&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="110" column="11" severity="warning" message="Local variable name &apos;xPosition&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="111" column="11" severity="warning" message="Local variable name &apos;yPosition&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+</file>
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/controller/Controller.java">
+<error line="87" column="15" severity="warning" message="Local final variable name &apos;rKeyCode&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalFinalVariableNameCheck"/>
+</file>
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/controller/MinMaxController.java">
+<error line="24" column="6" severity="warning" message="Unused @param tag for &apos;int&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+</file>
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/Board.java">
+</file>
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/pieces/QueenPiece.java">
+<error line="42" column="9" severity="warning" message="Local variable name &apos;xDifference&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="43" column="9" severity="warning" message="Local variable name &apos;yDifference&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+</file>
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/pieces/KingPiece.java">
+<error line="35" column="15" severity="warning" message="Local final variable name &apos;xOffset&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalFinalVariableNameCheck"/>
+<error line="36" column="15" severity="warning" message="Local final variable name &apos;yOffset&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalFinalVariableNameCheck"/>
+</file>
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/pieces/RookPiece.java">
+<error line="33" column="9" severity="warning" message="Local variable name &apos;xDifference&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+<error line="34" column="9" severity="warning" message="Local variable name &apos;yDifference&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+</file>
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/pieces/KnightPiece.java">
+<error line="35" column="15" severity="warning" message="Local final variable name &apos;xOffset&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalFinalVariableNameCheck"/>
+<error line="36" column="15" severity="warning" message="Local final variable name &apos;yOffset&apos; must match pattern &apos;^(_|[a-z](?=[a-z0-9]|$)(?:[a-zA-Z]|[0-9]+(?:_[0-9]+)*)*)$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalFinalVariableNameCheck"/>
+</file>
+<file name="/home/cockblocker/Desktop/Programming/Java/chess/src/main/java/areolsen/model/grid/Position.java">
+<error line="57" column="14" severity="warning" message="Method name &apos;xDifference&apos; must be more than a character, start lowercase, and not have a single lowercase followed by uppercase, or consecutive uppercase." source="com.puppycrawl.tools.checkstyle.checks.naming.GoogleMethodNameCheck"/>
+<error line="67" column="14" severity="warning" message="Method name &apos;yDifference&apos; must be more than a character, start lowercase, and not have a single lowercase followed by uppercase, or consecutive uppercase." source="com.puppycrawl.tools.checkstyle.checks.naming.GoogleMethodNameCheck"/>
+</file>
+</checkstyle>

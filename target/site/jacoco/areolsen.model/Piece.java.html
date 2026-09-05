@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Piece.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.model</a> &gt; <span class="el_source">Piece.java</span></div><h1>Piece.java</h1><pre class="source lang-java linenums">package areolsen.model;
+
+import areolsen.model.grid.Position;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+/** Abstract ChessPiece class. */
+public abstract class Piece {
+  protected final Board board;
+  protected final Side side;
+
+  /**
+   * Initialize a chesspiece on board with side.
+   *
+   * @param board ChessBoard board the piece belongs to.
+   * @param side The side the piece belongs to.
+   */
+<span class="fc" id="L19">  public Piece(Board board, Position position, Side side) throws IllegalArgumentException {</span>
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">    if (board == null) {</span>
+<span class="nc" id="L21">      throw new IllegalArgumentException(&quot;Piece can't belong to null board.&quot;);</span>
+    }
+<span class="fc" id="L23">    this.side = side;</span>
+<span class="fc" id="L24">    this.board = board;</span>
+<span class="fc" id="L25">    this.board.getGrid().placePiece(position, this);</span>
+<span class="fc" id="L26">  }</span>
+
+  /**
+   * Gets side of chesspiece.
+   *
+   * @return ChessSide the piece belongs to.
+   */
+  public Side getSide() {
+<span class="fc" id="L34">    return this.side;</span>
+  }
+
+  /**
+   * Gets position of chesspiece.
+   *
+   * @return Position of piece.
+   */
+  public Position getPosition() {
+<span class="fc" id="L43">    return board.getGrid().getPosition(this).get();</span>
+  }
+
+  /**
+   * Gets the value of the piece.
+   *
+   * @return value of piece.
+   */
+  public abstract double getValue();
+
+  /**
+   * Gets string representation character of piece. For example &quot;P&quot; for pawn, &quot;N&quot; for knight.
+   *
+   * @return character of piece.
+   */
+  public abstract String getType();
+
+  /**
+   * Gets list of end positions that are legal to be moved.
+   *
+   * @return List of moves piece can move to.
+   */
+  protected List&lt;Move&gt; getLegalMoves() {
+<span class="fc" id="L66">    List&lt;Move&gt; positions = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">    for (int row = 0; row &lt; board.getHeight(); row++) {</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">      for (int col = 0; col &lt; board.getWidth(); col++) {</span>
+<span class="fc" id="L70">        Position position = new Position(row, col);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (legalMoveEnd(position)) {</span>
+<span class="fc" id="L72">          positions.add(new Move(getPosition(), this, position, board.getPiece(position)));</span>
+        }
+      }
+    }
+
+<span class="fc" id="L77">    return positions;</span>
+  }
+
+  /**
+   * Gets legality of end position to move to.
+   *
+   * @param end Position to check if legal to move to.
+   * @return true if legal to move to end position, false else.
+   */
+  public boolean legalMoveEnd(Position end) {
+<span class="fc" id="L87">    boolean samePosition = end.equals(getPosition());</span>
+<span class="fc" id="L88">    boolean insideBounds = board.getGrid().insideBounds(end);</span>
+<span class="pc bpc" id="L89" title="1 of 4 branches missed.">    if (samePosition || !insideBounds) {</span>
+<span class="fc" id="L90">      return false;</span>
+    }
+
+<span class="fc" id="L93">    Position position = getPosition();</span>
+
+    // If to capture is an existing piece check if possible.
+<span class="fc" id="L96">    Optional&lt;Piece&gt; capturedPiece = board.getPiece(end);</span>
+<span class="fc bfc" id="L97" title="All 4 branches covered.">    if (capturedPiece.isPresent() &amp;&amp; capturedPiece.get().getSide() == getSide()) {</span>
+<span class="fc" id="L98">      return false;</span>
+    }
+
+    // If adheres to movement patterns.
+<span class="fc bfc" id="L102" title="All 2 branches covered.">    if (!movementPattern(end)) {</span>
+<span class="fc" id="L103">      return false;</span>
+    }
+
+    // Move piece.
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">    if (!board.getGrid().movePiece(position, end)) {</span>
+<span class="nc" id="L108">      return false;</span>
+    }
+
+    // Check if promote this piece to queen.
+<span class="fc" id="L112">    boolean promotedPawnToQueen = board.promotePawnToQueen(end);</span>
+
+    // Verify no king check
+<span class="fc" id="L115">    final boolean kingCheck = board.kingInCheck(side);</span>
+
+    // If this piece got promoted to queen, restore this piece.
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">    if (promotedPawnToQueen) {</span>
+<span class="nc" id="L119">      board.getGrid().removePiece(end);</span>
+<span class="nc" id="L120">      board.getGrid().placePiece(end, this);</span>
+    }
+
+    // Return back to start.
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">    if (!board.getGrid().movePiece(end, position)) {</span>
+<span class="nc" id="L125">      throw new IllegalStateException(</span>
+          &quot;Error detected: Piece moved during legality simulation not reversed.&quot;);
+    }
+
+    // Replace captured piece.
+<span class="fc bfc" id="L130" title="All 2 branches covered.">    if (capturedPiece.isPresent()) {</span>
+<span class="fc" id="L131">      board.getGrid().placePiece(end, capturedPiece.get());</span>
+    }
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">    return !kingCheck;</span>
+  }
+
+  /**
+   * Checks if the end position is allowed by the movement pattern the piece has. Does not verify
+   * legality of move regarding checks of king.
+   *
+   * @param end Position to check if follows movement pattern.
+   * @return true if follows movement pattern, else false.
+   */
+  protected abstract boolean movementPattern(Position end);
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

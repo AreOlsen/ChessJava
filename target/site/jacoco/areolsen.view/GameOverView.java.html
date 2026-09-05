@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameOverView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">chess</a> &gt; <a href="index.source.html" class="el_package">areolsen.view</a> &gt; <span class="el_source">GameOverView.java</span></div><h1>GameOverView.java</h1><pre class="source lang-java linenums">package areolsen.view;
+
+import java.awt.Graphics2D;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+
+/**
+ * Default Game Over View. Includes:
+ *
+ * &lt;ul&gt;
+ *   &lt;li&gt;&quot;Chess&quot; title
+ *   &lt;li&gt;Back to main menu button.
+ * &lt;/ul&gt;
+ */
+public class GameOverView extends View {
+
+  /**
+   * Construct a Chess View instance.
+   *
+   * @param handler ViewHandler to switch to menu.
+   */
+<span class="nc" id="L22">  public GameOverView(ViewHandler handler) {</span>
+<span class="nc" id="L23">    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));</span>
+<span class="nc" id="L24">    add(Box.createVerticalGlue());</span>
+<span class="nc" id="L25">    addText(&quot;Chess&quot;, 50);</span>
+<span class="nc" id="L26">    add(Box.createVerticalStrut(30));</span>
+<span class="nc" id="L27">    addButton(&quot;Back to start&quot;, e -&gt; handler.changeActiveView(&quot;menu&quot;));</span>
+<span class="nc" id="L28">    add(Box.createVerticalGlue());</span>
+<span class="nc" id="L29">  }</span>
+
+  @Override
+<span class="nc" id="L32">  public void onStart() {}</span>
+
+  @Override
+<span class="nc" id="L35">  public void onStop() {}</span>
+
+  @Override
+<span class="nc" id="L38">  public void update() {}</span>
+
+  @Override
+  public void render(Graphics2D g2) {
+<span class="nc" id="L42">    renderBackground(g2, &quot;background.png&quot;);</span>
+<span class="nc" id="L43">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
